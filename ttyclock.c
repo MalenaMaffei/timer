@@ -225,7 +225,7 @@ void
 draw_number(int n, int x, int y)
 {
      int i, sy = y;
-
+     n = 2;   
      for(i = 0; i < 30; ++i, ++sy)
      {
           if(sy == y + 6)

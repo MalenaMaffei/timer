@@ -72,6 +72,7 @@ def draw_text(stdscr, text, color=0, fallback=None, title=None):
     """
     Draws text in the given color. Duh.
     """
+    # text = "2"
     if fallback is None:
         fallback = text
     y, x = stdscr.getmaxyx()
