@@ -31,6 +31,18 @@ from pyfiglet import CharNotPrinted, Figlet
 
 
 click.disable_unicode_literals_warning = True
+NUMBERS = [
+     [1,1,1,1,0,1,1,0,1,1,0,1,1,1,1], #/* 0 */
+     [0,0,1,0,0,1,0,0,1,0,0,1,0,0,1], #/* 1 */
+     [1,1,1,0,0,1,1,1,1,1,0,0,1,1,1], #/* 2 */
+     [1,1,1,0,0,1,1,1,1,0,0,1,1,1,1], #/* 3 */
+     [1,0,1,1,0,1,1,1,1,0,0,1,0,0,1], #/* 4 */
+     [1,1,1,1,0,0,1,1,1,0,0,1,1,1,1], #/* 5 */
+     [1,1,1,1,0,0,1,1,1,1,0,1,1,1,1], #/* 6 */
+     [1,1,1,0,0,1,0,0,1,0,0,1,0,0,1], #/* 7 */
+     [1,1,1,1,0,1,1,1,1,1,0,1,1,1,1], #/* 8 */
+     [1,1,1,1,0,1,1,1,1,0,0,1,1,1,1], #/* 9 */
+]
 
 DEFAULT_FONT = "univers"
 TIMEDELTA_REGEX = re.compile(r'((?P<years>\d+)y ?)?'
@@ -76,6 +88,7 @@ def draw_text(stdscr, text, color=0, fallback=None, title=None):
     if fallback is None:
         fallback = text
     y, x = stdscr.getmaxyx()
+    # drawNumber(stdscr, 2, x, y)
     if title:
         title = pad_to_size(title, x, 1)
         if "\n" in title.rstrip("\n"):
@@ -96,6 +109,19 @@ def draw_text(stdscr, text, color=0, fallback=None, title=None):
             pass
     stdscr.refresh()
 
+def drawNumber(stdscr, number, x, y):
+     # aca tengo que agarrar el numero y dibujarlo
+     sy = y
+     for i in range(0, 30):
+          if sy == y + 6:
+               sy = y
+               x+=1
+
+          stdscr.bkgdset(curses.color_pair(NUMBERS[number][i/2]))
+          stdscr.insstr(x, sy, ' ')
+          sy+=1
+
+     stdscr.refresh()
 
 def format_seconds(seconds, hide_seconds=False):
     """
